@@ -1,0 +1,14 @@
+## Node
+
+*/node_modules
+
+##Idea
+
+*.log
+*.pyc
+*.orig
+*.iml
+*.ipr
+*.iws
+*.csv
+.idea
