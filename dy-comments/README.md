@@ -23,7 +23,7 @@ Anonymous Comments
 
 Устанавливаем зависимости. В директории проекта выполняем:
 ```
-    npm run install
+    npm install
 ```
 
 ## Разработка
