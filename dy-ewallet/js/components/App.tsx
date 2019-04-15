@@ -37,7 +37,7 @@ class App extends React.Component<AppProps, any> {
   }
 
   public componentDidMount(): void {
-    const time = 1000 * 10; // Limit is 100 requests/hour
+    const time = 1000 * 1000; // Limit is 100 requests/hour
 
     this.timer = setInterval(() => this.refresh(), time);
 
@@ -64,8 +64,10 @@ class App extends React.Component<AppProps, any> {
 
     let value = Number(event.target.value);
 
-    if (event.target.value > this.maxValue) {
+    if (event.target.value > this.maxValue || event.target.value < 0) {
       value = this.maxValue;
+    } else if (event.target.value < 0) {
+      value = 0;
     }
 
     value = Number(value.toFixed(2));
@@ -88,10 +90,6 @@ class App extends React.Component<AppProps, any> {
       })
     ).then(() => {
       this.updateMaxValue();
-      this.setState({
-        value: 0,
-        convertedValue: 0,
-      });
     });
   }
 
@@ -110,6 +108,15 @@ class App extends React.Component<AppProps, any> {
     if (!currentFr) { return; }
 
     this.maxValue = currentFr.value;
+
+    if (this.state.value > this.maxValue) {
+      this.setState({
+        value: this.maxValue,
+        convertedValue: this.convert(
+          this.maxValue,
+        ),
+      });
+    }
   }
 
   private getConvert(q): any {
